@@ -17,7 +17,9 @@ module.exports = {
   mode: "development",
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'Output Management',
+      title: 'NOVEMBERIZING\'S WEB CHAT',
+      filename: 'index.html',
+      template: 'index.html'
     }),
   ],
   devServer: {
@@ -25,6 +27,24 @@ module.exports = {
   },
   module: {
     rules: [
+      {
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+        },
+      },
+      {
+        test: /\.html$/,
+        use: [
+          {
+            loader: 'html-loader',
+            options: {
+              minimize: true,
+            },
+          },
+        ],
+      },
       {
         test: /\.css$/i,
         use: ['style-loader', 'css-loader'],
