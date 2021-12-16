@@ -1,0 +1,6 @@
+package-lock.json
+node_modules
+dist/main.js
+dist/main.js.LICENSE.txt
+dist/*.png
+dist/*.ttf
