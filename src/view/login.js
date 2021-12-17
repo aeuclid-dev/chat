@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class App extends React.Component {
+export default class Login extends React.Component {
     constructor(props) {
         super(props);
     }
@@ -8,7 +8,7 @@ export default class App extends React.Component {
         return [
             <header className="mb-auto">
                 <div>
-                    <h3 className="float-md-start mb-0"><strong>X WEB VIDEO CHAT</strong></h3>
+                    <h3 className="float-md-start mb-0"><strong>X VIDEO CHAT</strong></h3>
                     <nav className="nav nav-masthead justify-content-center float-md-end">
                         <a className="nav-link active" aria-current="page" href="#">HOME</a>
                         <a className="nav-link" href="#">FEATURE</a>
@@ -44,7 +44,7 @@ export default class App extends React.Component {
                     <div className="row mt-4">
                         <div className="col-3"></div>
                         <div className="col-6 text-end">
-                            <button type="submit" className="btn btn-outline-light" onClick="">Confirm</button>
+                            <button type="submit" className="btn btn-primary" onClick="">Confirm</button>
                         </div>
                         <div className="col-3"></div>
                     </div>
@@ -52,8 +52,8 @@ export default class App extends React.Component {
             </main>,
             <footer className="mt-auto text-white-50">
                 <p>
-                    NOVEMBERIZING | ABOUT 
-                </p>
+
+                    Cover template for <a href="https://getbootstrap.com/" className="text-white">Bootstrap</a>, by <a href="https://twitter.com/mdo" className="text-white">@mdo</a>.</p>
             </footer>
         ]
     }
