@@ -15,7 +15,27 @@ app.use(
 );
 
 app.get('/v1/user/register/', (req, res) => {
-  res.send('Hello World!');
+  res.send('user register');
+});
+
+app.get('/v1/room/create/', (req, res) => {
+  res.send('room create');
+});
+
+app.get('/v1/room/delete/', (req, res) => {
+    res.send('room delete');
+});
+
+app.get('/v1/room/invite/', (req, res) => {
+    res.send('room invite');
+});
+
+app.get('/v1/room/invite/accept/', (req, res) => {
+    res.send('room invite accept');
+});
+
+app.get('/v1/room/invite/reject/', (req, res) => {
+    res.send('room invite reject');
 });
 
 // Serve the files on port 3000.
