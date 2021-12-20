@@ -50,6 +50,22 @@
       <rect width="1280" height="800" x="-500" y="-362" fill="black"/>
       <use fill="white" xlink:href="#path-25"/>
     </mask>
+    <rect id="rect-30" width="150" height="50" x="0" y="0"/>
+    <path id="path-32" fill-rule="evenodd" d="M5 0h350c2.75957512 0 5 2.24042488 5 5v169c0 2.75957512-2.24042488 5-5 5H5c-2.75957512 0-5-2.24042488-5-5V5c0-2.75957512 2.24042488-5 5-5z"/>
+    <mask id="mask-33" x="-462" y="-311" maskContentUnits="userSpaceOnUse" maskUnits="userSpaceOnUse">
+      <rect width="1280" height="800" x="-462" y="-311" fill="black"/>
+      <use fill="white" xlink:href="#path-32"/>
+    </mask>
+    <ellipse id="ellipse-34" cx="60" cy="45" rx="20" ry="20"/>
+    <mask id="mask-35" x="-462" y="-311" maskContentUnits="userSpaceOnUse" maskUnits="userSpaceOnUse">
+      <rect width="1280" height="800" x="-462" y="-311" fill="black"/>
+      <use fill="white" xlink:href="#ellipse-34"/>
+    </mask>
+    <path id="path-36" fill-rule="evenodd" d="M6.49725041 0c2.2076601 0 4 1.7923399 4 4v2c0 2.2076601-1.7923399 4-4 4s-4-1.7923399-4-4V4c0-2.2076601 1.7923399-4 4-4z"/>
+    <mask id="mask-37" x="-515.501" y="-348.227" maskContentUnits="userSpaceOnUse" maskUnits="userSpaceOnUse">
+      <rect width="1280" height="800" x="-515.501" y="-348.227" fill="black"/>
+      <use fill="white" xlink:href="#path-36"/>
+    </mask>
   </defs>
   <rect width="1280" height="800" x="0" y="0" fill="rgb(34,34,34)"/>
   <text font-size="0" style="white-space:pre">
@@ -131,5 +147,41 @@
         <path fill="none" stroke="rgb(255,51,102)" stroke-width="2" d="M335.00498129 235.00165125l4.9908214 5.00223131L335 244.99834875"/>
       </g>
     </g>
+  </g>
+  <g opacity=".9">
+    <rect width="1280" height="800" x="0" y="0" fill="rgb(34,34,34)"/>
+  </g>
+  <path fill="rgb(119,119,119)" fill-rule="evenodd" d="M456 214h370c4.4153202 0 8 3.5846798 8 8v356c0 4.4153202-3.5846798 8-8 8H456c-4.4153202 0-8-3.5846798-8-8V222c0-4.4153202 3.5846798-8 8-8z"/>
+  <g transform="translate(486 236)">
+    <text font-size="0" style="white-space:pre">
+      <tspan x="0" y="45" fill="rgb(255,255,255)" font-family="Arial" font-size="44" font-weight="400" style="white-space:pre;text-transform:none">Eeyore</tspan>
+    </text>
+    <g transform="translate(79 271)">
+      <path fill="rgb(255,51,102)" fill-rule="evenodd" d="M5 0h140c2.75957512 0 5 2.24042488 5 5v40c0 2.75957512-2.24042488 5-5 5H5c-2.75957512 0-5-2.24042488-5-5V5c0-2.75957512 2.24042488-5 5-5z"/>
+      <text font-size="0" style="white-space:pre">
+        <tspan x="39" y="29" fill="rgb(255,255,255)" font-family="Arial" font-size="12" font-weight="400" style="white-space:pre;text-transform:uppercase" letter-spacing="3.75">CANCEL</tspan>
+      </text>
+    </g>
+  </g>
+  <g transform="translate(462 311)">
+    <use fill-opacity="0" stroke="rgb(70,70,70)" stroke-width="2" mask="url(#mask-33)" xlink:href="#path-32"/>
+    <g>
+      <use fill-opacity="0" stroke="rgb(51,51,51)" stroke-width="4" mask="url(#mask-35)" xlink:href="#ellipse-34"/>
+      <g transform="translate(53.5013748 37.22742051)">
+        <use fill-opacity="0" stroke="rgb(255,51,102)" stroke-width="4" mask="url(#mask-37)" xlink:href="#path-36"/>
+        <path fill="none" stroke="rgb(255,51,102)" stroke-width="2" d="M0 15.54515897S.49725041 12 6.49725041 12s6.5 3.5 6.5 3.5"/>
+      </g>
+    </g>
+    <g>
+      <text font-size="0" style="white-space:pre">
+        <tspan x="95" y="62" fill="rgb(255,255,255)" font-family="Arial" font-size="18" font-weight="400" style="white-space:pre;text-transform:none">Eeyore</tspan>
+      </text>
+      <text font-size="0" style="white-space:pre" opacity=".5">
+        <tspan x="95" y="40.5" fill="rgb(255,255,255)" font-family="Arial" font-size="16" font-weight="400" style="white-space:pre;text-transform:none">@Eeyore</tspan>
+      </text>
+    </g>
+    <text font-size="0" style="white-space:pre">
+      <tspan x="40" y="95" fill="rgb(255,255,255)" font-family="Arial" font-size="12" font-weight="400" style="white-space:pre;text-transform:none">Eeyore appears in the Winnie the Pooh cartoons </tspan> <tspan x="40" y="115" fill="rgb(255,255,255)" font-family="Arial" font-size="12" font-weight="400" style="white-space:pre;text-transform:none">produced by The Walt Disney Company. He is </tspan> <tspan x="40" y="135" fill="rgb(255,255,255)" font-family="Arial" font-size="12" font-weight="400" style="white-space:pre;text-transform:none">somewhat less caustic and sarcastic in the Disney </tspan> <tspan x="40" y="155" fill="rgb(255,255,255)" font-family="Arial" font-size="12" font-weight="400" style="white-space:pre;text-transform:none">version than in Milne's original stories.</tspan>
+    </text>
   </g>
 </svg>
