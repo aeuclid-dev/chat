@@ -1,6 +1,8 @@
 NOVEMBERIZING X WEB VIDEO CHAT
 ==============================
 
+2021/12/20 : AWS INSTANCE LAUNCH
+
 ## PROTOTYPE
 
 ![home](HOME.svg)
