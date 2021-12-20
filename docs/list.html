@@ -26,6 +26,7 @@
       }
     </style>
     <link href="cover.css" rel="stylesheet">
+    <script src="./bootstrap/js/bootstrap.bundle.min.js"></script>
   </head>
   <body class="d-flex h-100 text-center text-white bg-dark">
     <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
@@ -70,11 +71,91 @@
             <hr />
             <div class="card-text text-secondary fs-6">
                 <span class="float-start"><i class="far fa-comment-alt"></i> 123 people are talking about this</span>
-                <span class="float-end"><i class="fas fa-chevron-right fa-sm"></i></span>
+                <span class="float-end">
+                  <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-chevron-right fa-sm"></i></a>
+                </span>
             </div>
           </div>
         </div>
       </main>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade text-dark" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Pooh</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body mx-auto">
+            <div class="card bg-transparent text-start text-dark border border-secondary" style="width: 24rem;">
+              <div class="card-body">
+                <h5 class="card-title">
+                    <div class="row">
+                        <div class="col-2">
+                            <i class="far fa-user-circle fa-2x"></i>
+                        </div>
+                        <div class="col">
+                            <div class="row">
+                                <div class="col fs-6">Pooh</div>
+                            </div>
+                            <div class="row">
+                                <div class="col text-secondary fs-6">@Pooh</div>
+                            </div>
+                        </div>
+                    </div>
+                </h5>
+                <p class="card-text text-secondary fs-6">Winnie-the-Pooh, also called Pooh Bear and Pooh, is a fictional anthropomorphic teddy bear created by English author A. A. Milne and English illustrator E. H. Shepard.</p>
+                <p class="card-text text-secondary fs-6">
+                    <span><i class="far fa-heart"></i> 4.5</span><span class="ms-3">09:30 Nov 14, 2018</span>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade text-dark" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Pooh</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body mx-auto">
+            <div class="card bg-transparent text-start text-dark border border-secondary" style="width: 24rem;">
+              <div class="card-body">
+                <h5 class="card-title">
+                    <div class="row">
+                        <div class="col-2">
+                            <i class="far fa-user-circle fa-2x"></i>
+                        </div>
+                        <div class="col">
+                            <div class="row">
+                                <div class="col fs-6">Pooh</div>
+                            </div>
+                            <div class="row">
+                                <div class="col text-secondary fs-6">@Pooh</div>
+                            </div>
+                        </div>
+                    </div>
+                </h5>
+                <p class="card-text text-secondary fs-6">Winnie-the-Pooh, also called Pooh Bear and Pooh, is a fictional anthropomorphic teddy bear created by English author A. A. Milne and English illustrator E. H. Shepard.</p>
+                <p class="card-text text-secondary fs-6">
+                    <span><i class="far fa-heart"></i> 4.5</span><span class="ms-3">09:30 Nov 14, 2018</span>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Accept</button>
+            <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Reject</button>
+          </div>
+        </div>
+      </div>
     </div>
   </body>
 </html>
