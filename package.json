@@ -1,0 +1,29 @@
+{
+  "name": "chat",
+  "version": "0.0.1",
+  "description": "novemberizing x web chat",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "build:dev": "webpack --config webpack.dev.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/novemberizing/chat.git"
+  },
+  "keywords": [
+    "novemberizing",
+    "x",
+    "web",
+    "chat"
+  ],
+  "author": "novemberizing <novemberizing@gmail.com>",
+  "license": "MPL-2.0",
+  "bugs": {
+    "url": "https://github.com/novemberizing/chat/issues"
+  },
+  "homepage": "https://github.com/novemberizing/chat#readme"
+}
