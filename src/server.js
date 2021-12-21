@@ -20,8 +20,6 @@ const database = {
 
 const pool = mysql.createPool(database);
 
-console.log(pool);
-
 app.use(
   webpackDevMiddleware(compiler, {
     publicPath: config.output.publicPath,
@@ -51,8 +49,7 @@ app.post('/v1/user/register/', (req, res) => {
         const params = [req.body.email, req.body.name, req.body.description];
         connection.query(sql, params, function(error, result) {
           if(!error) {
-            console.log('ok');
-            res.send({'message': 'ok'});
+            res.send({message: {userid: result[0][0].USERID}});
           } else {
             console.log(error);
             res.status(500).send({'error': 'internal storage error'});

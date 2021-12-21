@@ -42,7 +42,7 @@
         console.log({email, name, description});
         axios.post('http://localhost:3000/v1/user/register', {email, name, description})
              .then(res => {
-               console.log(res);
+               location.href=`./list.html?userid=${res.data.message.userid}`;
               });
       }
     </script>
