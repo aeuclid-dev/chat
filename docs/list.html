@@ -44,6 +44,11 @@
       client.onerror = function(event) {
         console.log(event);
       };
+      function requestChat(no) {
+        // update modal data
+        client.send(JSON.stringify({message: 'request chat', request: {from: parseInt(userid), to: no}}));
+
+      }
       function onListLoad() {
 
         axios.get('http://localhost:3000/v1/room/list/')
@@ -81,7 +86,7 @@
             <div class="card-text text-secondary fs-6">
                 <span class="float-start"><i class="far fa-comment-alt"></i> 123 people are talking about this</span>
                 <span class="float-end">
-                  <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-chevron-right fa-sm"></i></a>
+                  <a href="#" data-bs-toggle="modal" data-bs-target="#requestChatModal" onclick="requestChat(${res.data.message.result[i].id});"><i class="fas fa-chevron-right fa-sm"></i></a>
                 </span>
             </div>
           </div>`;
@@ -115,11 +120,11 @@
       </main>
     </div>
     <!-- Modal -->
-    <div class="modal fade text-dark" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade text-dark" id="requestChatModal" tabindex="-1" aria-labelledby="requestChatModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Pooh</h5>
+            <h5 class="modal-title" id="requestChatModalLabel">Pooh</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body mx-auto">
@@ -153,6 +158,7 @@
         </div>
       </div>
     </div>
+    <!-- MODAL: START -->
     <div class="modal fade text-dark" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">

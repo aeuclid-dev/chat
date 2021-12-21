@@ -185,6 +185,8 @@ wss.on('connection', function connection(ws) {
       userid = json.userid;
       createRoom(ws, json.userid);
       console.log('create room');
+    } else if(json.message === 'request chat') {
+      console.log('hello world');
     }
   });
 
