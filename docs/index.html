@@ -30,12 +30,20 @@
     <script src="./axios/axios.js"></script>
     <script>
       function registerUser() {
-        axios.post('http://localhost:3000/v1/user/register', {
-          name: 'new name'
-        }).then(res => {
-          console.log(res);
-          alert(res);
-        });
+        let email = document.getElementById('inputEmail').value;
+        let name = document.getElementById('inputName').value;
+        let description = document.getElementById('inputDescription').value;
+        if(!name) {
+          name = 'Pooh';
+        }
+        if(!description) {
+          description = 'Winnie-the-Pooh, also called Pooh Bear and Pooh, is a fictional anthropomorphic teddy bear created by English author A. A. Milne and English illustrator E. H. Shepard.';
+        }
+        console.log({email, name, description});
+        axios.post('http://localhost:3000/v1/user/register', {email, name, description})
+             .then(res => {
+               console.log(res);
+              });
       }
     </script>
   </head>
@@ -58,18 +66,18 @@
             <h5 class="card-title">Register</h5>
             <p class="card-text text-secondary">If you want to use video chat, you must first register your email, name, and a description of yourself.</p>
             <div class="mb-3">
-              <label for="exampleInputEmail1" class="form-label">Email</label>
-              <input type="email" class="form-control bg-transparent border border-secondary text-white" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Input email">
+              <label for="inputEmail" class="form-label">Email</label>
+              <input type="email" class="form-control bg-transparent border border-secondary text-white" id="inputEmail" aria-describedby="emailHelp" placeholder="Input email">
               <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
             </div>
             <div class="mb-3">
-              <label for="exampleInputName1" class="form-label">Name</label>
-              <input type="text" class="form-control bg-transparent border border-secondary text-white" id="exampleInputName1" aria-describedby="nameHelp" placeholder="Input name">
+              <label for="inputName" class="form-label">Name</label>
+              <input type="text" class="form-control bg-transparent border border-secondary text-white" id="inputName" aria-describedby="nameHelp" placeholder="Input name">
               <div id="nameHelp" class="form-text">Enter the user's name.</div>
             </div>
             <div class="mb-3">
-              <label for="exampleFormControlTextarea1" class="form-label">Description</label>
-              <textarea class="form-control bg-transparent border border-secondary text-white" id="exampleFormControlTextarea1" rows="3"  placeholder="Input description"></textarea>
+              <label for="inputDescription" class="form-label">Description</label>
+              <textarea class="form-control bg-transparent border border-secondary text-white" id="inputDescription" rows="3"  placeholder="Input description"></textarea>
             </div>
             <a href="#" class="btn btn-light" onclick="registerUser();">REGISTER</a>
           </div>

@@ -29,7 +29,8 @@
   "homepage": "https://github.com/novemberizing/chat#readme",
   "dependencies": {
     "cors": "^2.8.5",
-    "express": "^4.17.2"
+    "express": "^4.17.2",
+    "mysql2": "^2.3.3"
   },
   "devDependencies": {
     "@babel/core": "^7.16.5",
