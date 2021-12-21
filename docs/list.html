@@ -28,8 +28,71 @@
     <link href="cover.css" rel="stylesheet">
     <script src="./bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="./axios/axios.js"></script>
+    <script>
+      const urlParams = new URLSearchParams(window.location.search);
+      const userid = urlParams.get('userid');
+      var client = new WebSocket("ws://localhost:3030/", "protocolOne");
+      client.onopen = function (event) {
+        client.send(JSON.stringify({message: 'open', userid}));
+      };
+      client.onmessage = function (event) {
+        console.log(event.data);
+      };
+      client.onclose = function(event) {
+        console.log(event);
+      };
+      client.onerror = function(event) {
+        console.log(event);
+      };
+      function onListLoad() {
+
+        axios.get('http://localhost:3000/v1/room/list/')
+             .then(res => {
+              console.log(res);
+              if(res.data.message.result && res.data.message.result.length) {
+                for(let i = 0; i < res.data.message.result.length;i++) {
+                  if(userid == res.data.message.result[i].id) {
+                    continue;
+                  }
+                  const element = document.createElement('div');
+                  element.className="card bg-transparent text-dark text-white border border-secondary mb-2";
+                  element.style = "width: 24rem;";
+                  element.innerHTML = `<div class="card-body">
+            <h5 class="card-title">
+                <div class="row">
+                    <div class="col-2">
+                        <i class="far fa-user-circle fa-2x"></i>
+                    </div>
+                    <div class="col">
+                        <div class="row">
+                            <div class="col fs-6">${res.data.message.result[i].name}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col text-secondary fs-6">${res.data.message.result[i].id}@${res.data.message.result[i].email}</div>
+                        </div>
+                    </div>
+                </div>
+            </h5>
+            <p class="card-text text-secondary fs-6">${res.data.message.result[i].description}</p>
+            <p class="card-text text-secondary fs-6">
+                <span><i class="far fa-heart"></i> ${res.data.message.result[i].like}</span><span class="ms-3">09:30 Nov 14, 2018</span>
+            </p>
+            <hr />
+            <div class="card-text text-secondary fs-6">
+                <span class="float-start"><i class="far fa-comment-alt"></i> 123 people are talking about this</span>
+                <span class="float-end">
+                  <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-chevron-right fa-sm"></i></a>
+                </span>
+            </div>
+          </div>`;
+                  document.getElementById('roomList').appendChild(element);
+                }
+              }
+             });
+      }
+    </script>
   </head>
-  <body class="d-flex h-100 text-center text-white bg-dark">
+  <body class="d-flex h-100 text-center text-white bg-dark" onload="onListLoad();">
     <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
       <header class="mb-3">
         <div>
@@ -46,38 +109,9 @@
           NOVEMBERIZING / PROJECT X / WEB VIDEO CHAT / LICENSE
         </p>
       </footer>
-      <main class="mb-3 px-3 text-start row justify-content-center">
+      <main class="mb-3 px-3 text-start row justify-content-center" id="roomList">
         <!-- style="width: 18rem;" -->
-        <div class="card bg-transparent text-dark text-white border border-secondary" style="width: 24rem;">
-          <div class="card-body">
-            <h5 class="card-title">
-                <div class="row">
-                    <div class="col-2">
-                        <i class="far fa-user-circle fa-2x"></i>
-                    </div>
-                    <div class="col">
-                        <div class="row">
-                            <div class="col fs-6">Pooh</div>
-                        </div>
-                        <div class="row">
-                            <div class="col text-secondary fs-6">@Pooh</div>
-                        </div>
-                    </div>
-                </div>
-            </h5>
-            <p class="card-text text-secondary fs-6">Winnie-the-Pooh, also called Pooh Bear and Pooh, is a fictional anthropomorphic teddy bear created by English author A. A. Milne and English illustrator E. H. Shepard.</p>
-            <p class="card-text text-secondary fs-6">
-                <span><i class="far fa-heart"></i> 4.5</span><span class="ms-3">09:30 Nov 14, 2018</span>
-            </p>
-            <hr />
-            <div class="card-text text-secondary fs-6">
-                <span class="float-start"><i class="far fa-comment-alt"></i> 123 people are talking about this</span>
-                <span class="float-end">
-                  <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-chevron-right fa-sm"></i></a>
-                </span>
-            </div>
-          </div>
-        </div>
+
       </main>
     </div>
     <!-- Modal -->
