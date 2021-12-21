@@ -3,16 +3,34 @@ const webpack = require('webpack');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 
 const app = express();
+const cors = require('cors');
 const config = require('../config/webpack.dev.js');
 const compiler = webpack(config);
 
-// Tell express to use the webpack-dev-middleware and use the webpack.config.js
-// configuration file as a base.
 app.use(
   webpackDevMiddleware(compiler, {
     publicPath: config.output.publicPath,
   })
 );
+
+const whitelist = ["http://localhost:8090"];
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not Allowed Origin!"));
+    }
+  },
+};
+
+app.use(cors(corsOptions)); // 옵션을 추가한 CORS 미들웨어 추가
+
+// app.use(cors(corsOptions));
+
+app.post('/v1/user/register/', (req, res) => {
+  res.send('user register');
+});
 
 app.get('/v1/user/register/', (req, res) => {
   res.send('user register');

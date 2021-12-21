@@ -27,6 +27,17 @@
     </style>
     <link href="cover.css" rel="stylesheet">
     <script src="./bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="./axios/axios.js"></script>
+    <script>
+      function registerUser() {
+        axios.post('http://localhost:3000/v1/user/register', {
+          name: 'new name'
+        }).then(res => {
+          console.log(res);
+          alert(res);
+        });
+      }
+    </script>
   </head>
   <body class="d-flex h-100 text-center text-white bg-dark">
     <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
@@ -60,7 +71,7 @@
               <label for="exampleFormControlTextarea1" class="form-label">Description</label>
               <textarea class="form-control bg-transparent border border-secondary text-white" id="exampleFormControlTextarea1" rows="3"  placeholder="Input description"></textarea>
             </div>
-            <a href="#" class="btn btn-light">REGISTER</a>
+            <a href="#" class="btn btn-light" onclick="registerUser();">REGISTER</a>
           </div>
         </div>
       </main>
