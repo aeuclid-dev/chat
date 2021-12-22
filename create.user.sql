@@ -1,6 +1,9 @@
-CREATE USER 'novemberizing'@'localhost' IDENTIFIED BY 'helloworld@17';
+CREATE USER 'novemberizing'@'localhost' IDENTIFIED WITH mysql_native_password BY 'helloworld@17';
 GRANT ALL ON *.* TO 'novemberizing'@'localhost';
 ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'novemberizing@21';
+
+CREATE USER 'novemberizing'@'%' IDENTIFIED WITH mysql_native_password BY 'helloworld@17';
+GRANT ALL ON *.* TO 'novemberizing'@'%';
 
 USE xchat;
 
