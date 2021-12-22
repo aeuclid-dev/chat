@@ -165,28 +165,35 @@ function deleteRoom(ws, userid) {
   });
 }
 
+let users = new Map();
+
 wss.on('connection', function connection(ws) {
   let userid = 0;
 
   ws.on('open', function(event) {
     console.log(event);
-    console.log('insert implement');
   });
 
   ws.on('upgrade', function(event) {
     console.log(event);
-    console.log('update');
   });
 
   ws.on('message', function message(data) {
     const json = JSON.parse(data.toString());
     console.log(json);
     if(json.message === 'open') {
-      userid = json.userid;
+      userid = parseInt(json.userid);
+      users.set(userid, ws);
       createRoom(ws, json.userid);
       console.log('create room');
     } else if(json.message === 'request chat') {
       console.log('hello world');
+      console.log(users);
+      const to = users.get(json.request.to);
+      console.log(to);
+      if(to) {
+        to.send(JSON.stringify(json));
+      }
     }
   });
 
@@ -196,9 +203,8 @@ wss.on('connection', function connection(ws) {
 
   ws.on('close', function(event) {
     console.log('close ' + userid);
-    console.log('delete implement');
     deleteRoom(ws, userid);
   });
 
-  ws.send('something');
+  // ws.send('something');
 });
