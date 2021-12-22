@@ -187,12 +187,27 @@ wss.on('connection', function connection(ws) {
       createRoom(ws, json.userid);
       console.log('create room');
     } else if(json.message === 'request chat') {
-      console.log('hello world');
-      console.log(users);
-      const to = users.get(json.request.to);
-      console.log(to);
-      if(to) {
-        to.send(JSON.stringify(json));
+      if(json.result) {
+        if(json.result === 'accept' || json.result === 'reject') {
+          console.log(json.result);
+          const from = users.get(json.request.from);
+          if(from) {
+            from.send(JSON.stringify(json));
+          }
+        } else if(json.result === 'cancel') {
+          console.log(json.result);
+          const to = users.get(json.request.to);
+          if(to) {
+            to.send(JSON.stringify(json));
+          }
+        } else {
+          console.log('');
+        }
+      } else {
+        const to = users.get(json.request.to);
+        if(to) {
+          to.send(JSON.stringify(json));
+        }
       }
     }
   });
