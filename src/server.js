@@ -29,14 +29,15 @@ app.use(
   })
 );
 
-const whitelist = ["http://localhost:8090", "https://novemberizing.github.io"];
+const whitelist = ["http://172.30.1.23:8090", "https://novemberizing.github.io"];
 const corsOptions = {
   origin: function (origin, callback) {
-    if (whitelist.indexOf(origin) !== -1) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not Allowed Origin!"));
-    }
+    callback(null, true);
+    // if (whitelist.indexOf(origin) !== -1) {
+    //   callback(null, true);
+    // } else {
+    //   callback(new Error("Not Allowed Origin!"));
+    // }
   },
 };
 
@@ -181,7 +182,17 @@ wss.on('connection', function connection(ws) {
   ws.on('message', function message(data) {
     const json = JSON.parse(data.toString());
     console.log(json);
-    if(json.message === 'wait') {
+    if(json.message === 'candidate') {
+      const to = users.get(parseInt(json.to));
+      console.log(json);
+      to.send(data.toString());
+    } else if(json.message === 'answer') {
+      const to = users.get(parseInt(json.to));
+      to.send(data.toString());
+    } else if(json.message === 'offer') {
+      const to = users.get(parseInt(json.to));
+      to.send(data.toString());
+    } else if(json.message === 'wait') {
       userid = userid ? userid : parseInt(json.userid);
       users.set(userid, ws);
       createRoom(ws, json.userid);
@@ -190,8 +201,7 @@ wss.on('connection', function connection(ws) {
       if(to) {
         to.send(JSON.stringify({message: 'wait', userid, to: json.to, from: json.from}));
       }
-    }
-    if(json.message === 'open') {
+    } else if(json.message === 'open') {
       userid = parseInt(json.userid);
       users.set(userid, ws);
       createRoom(ws, json.userid);

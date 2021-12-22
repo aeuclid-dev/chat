@@ -33,28 +33,130 @@
     <script src="./bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="./axios/axios.js"></script>
     <script>
-
+      
+      const configuration = {}; // SET STUN & TUN
       class xWebConnection {
         constructor(id) {
           this._id = id;
+          this._stream = null;
+          this._video = document.getElementById('videoChatView');
+          this._connection = new RTCPeerConnection(configuration);
         }
 
         get id() {
           return this._id;
         }
+
+        get connection() {
+          return this._connection;
+        }
+
+        async start(chat, from) {
+          const constraints = { audio: true, video: true };
+          console.log(navigator);
+          console.log(navigator.mediaDevices);
+          this._stream = await navigator.mediaDevices.getUserMedia(constraints);
+          this._video.srcObject = this._stream;
+          this._stream.getTracks().forEach(track => this._connection.addTrack(track, this._stream));
+          // this._connection = new RTCPeerConnection(configuration);
+
+          this._connection.addEventListener('icecandidate', e => this.onIceCandidate(chat, e));
+          this._connection.addEventListener('iceconnectionstatechange', e => this.onIceConnectionStateChange(e));
+          this._connection.addEventListener('track', e => this.onTrack(e));
+          
+          await this.offer(chat, from);
+        }
+
+        async offer(chat, from) {
+          const offer = await this._connection.createOffer({ offerToReceiveAudio: 1, offerToReceiveVideo: 1 });
+          await this._connection.setLocalDescription(offer);
+          chat.client.send(JSON.stringify({message: 'offer', to: from, from: this._id, offer}));
+
+        }
+
+        async answer(chat, json) {
+          const constraints = { audio: true, video: true };
+          this._stream = await navigator.mediaDevices.getUserMedia(constraints);
+          this._stream.getTracks().forEach(track => this._connection.addTrack(track, this._stream));
+          this._video.srcObject = this._stream;
+          // this._connection = new RTCPeerConnection(configuration);
+
+          this._connection.addEventListener('icecandidate', e => this.onIceCandidate(chat, e));
+          this._connection.addEventListener('iceconnectionstatechange', e => this.onIceConnectionStateChange(e));
+          this._connection.addEventListener('track', e => this.onTrack(e));
+
+          await this._connection.setRemoteDescription(new RTCSessionDescription(json.offer));
+          const answer = await this._connection.createAnswer();
+          await this._connection.setLocalDescription(answer);
+
+          chat.client.send(JSON.stringify({message: 'answer', to: json.from, from: this._id, answer}));
+        }
+
+        async handshake(json) {
+          await this._connection.setRemoteDescription(new RTCSessionDescription(json.answer));
+        }
+
+        onIceCandidate(chat, e) {
+          console.log(e);
+          if(this === chat.from) {
+            const data = JSON.stringify({message: 'candidate', to: chat.to, from: this._id, candidate: e.candidate});
+            console.log(data);
+            chat.client.send(data);
+          } else {
+            const data = JSON.stringify({message: 'candidate', to: chat.from, from: this._id, candidate: e.candidate});
+            console.log(data);
+            chat.client.send(data);
+          }
+        }
+
+        onIceConnectionStateChange(e) {
+          console.log('================================================');
+          console.log(e);
+        }
+
+        onTrack(e) {
+          console.log(e);
+          this._video.srcObject = e.streams[0];
+        }
       }
 
       class xWebVideoChat {
         constructor(userid, from, to) {
-          this.from = new xWebConnection(from);
-          this.to = new xWebConnection(to);
-          this.client =  new WebSocket("ws://localhost:3030/", "protocolOne");
+          this.o = null;
+          this.to = null;
+          this.from = null;
+          this.client =  new WebSocket("ws://172.30.1.23:3030/", "protocolOne");
           this.userid = userid;
           this.client.onopen = event => {
-            this.client.send(JSON.stringify({message: 'wait', userid: this.userid, to: this.to.id, from: this.from.id}));
+            this.client.send(JSON.stringify({message: 'wait', userid: this.userid, to: to, from: from}));
           };
-          this.client.onmessage = event => {
-            console.log(event.data);
+          this.client.onmessage = async event => {
+            const json = JSON.parse(event.data);
+            console.log(json);
+            if(json.message === 'wait') {
+              // TO == USER
+              this.o = this.to = new xWebConnection(to);
+              this.from = from;
+              await this.to.start(this, from, this.from);
+            } else if(json.message === 'offer') {
+              // FROM == USER
+              this.o = this.from = new xWebConnection(from);
+              this.to =  to;
+              await this.from.answer(this, json, this.to);
+              console.log(json);
+            } else if(json.message === 'answer') {
+              // TO == USER
+              await this.to.handshake(json);
+              console.log(json);
+            } else if(json.message === 'candidate') {
+              console.log("-----------------------------------");
+              console.log(json);
+              console.log("-----------------------------------");
+              if(json.candidate) {
+                await this.o.connection.addIceCandidate(json.candidate);
+              }
+            } else {
+            }
           };
           this.client.onclose = event => {
             console.log(event);
@@ -65,6 +167,30 @@
       let chat = null;
 
       function onChatViewLoad() {
+        if (navigator.mediaDevices === undefined) {
+          navigator.mediaDevices = {};
+        }
+        if (navigator.mediaDevices.getUserMedia === undefined) {
+          navigator.mediaDevices.getUserMedia = function(constraints) {
+
+            // First get ahold of the legacy getUserMedia, if present
+            var getUserMedia = navigator.getUserMedia ||
+                              navigator.webkitGetUserMedia ||
+                              navigator.mozGetUserMedia ||
+                              navigator.msGetUserMedia;
+
+            // Some browsers just don't implement it - return a rejected promise with an error
+            // to keep a consistent interface
+            if (!getUserMedia) {
+              return Promise.reject(new Error('getUserMedia is not implemented in this browser'));
+            }
+
+            // Otherwise, wrap the call to the old navigator.getUserMedia with a Promise
+            return new Promise(function(resolve, reject) {
+              getUserMedia.call(navigator, constraints, resolve, reject);
+            });
+          }
+        }
         chat = new xWebVideoChat(urlParams.get('userid'), urlParams.get('from'), urlParams.get('to'));
       }
     </script>

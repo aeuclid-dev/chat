@@ -9,7 +9,7 @@ module.exports = {
     output: {
       path: path.resolve(__dirname, "../public"), // bundle만들어질 장소
       filename: "index.bundle.js", // bundle 될 파일 이름
-      publicPath: "http://localhost:3000/public" //웹팩 미들웨어 장소
+      publicPath: "http://172.30.1.23:3000/public" //웹팩 미들웨어 장소
     },
     module: {
       rules: [
