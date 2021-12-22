@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> -->
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.88.1">
@@ -93,7 +93,7 @@
       function onListLoad() {
         requestModal = new bootstrap.Modal(document.getElementById('requestChatModal'), {focus:true});
         responseModal = new bootstrap.Modal(document.getElementById('responseChatModal'), {focus:true});
-        axios.get('http://ec2-15-164-93-25.ap-northeast-2.compute.amazonaws.com:3000/v1/room/list/')
+        axios.get('http://localhost:3000/v1/room/list/')
              .then(res => {
               console.log(res);
               if(res.data.message.result && res.data.message.result.length) {
