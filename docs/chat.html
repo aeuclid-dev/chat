@@ -5,8 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> -->
     <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Hugo 0.88.1">
+    <meta name="author" content="">
+    <meta itemprop="name" content="">
+    <meta name="generator" content="">
+    <meta itemprop="image" content="">
+    <meta name="mobile-web-app-capable" content="yes">
     <title>X WEB VIDEO CHAT</title>
     <!-- <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/cover/"> -->
     <link href="./fontawesome/css/all.css" rel="stylesheet">
@@ -30,26 +33,43 @@
     <script src="./bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="./axios/axios.js"></script>
     <script>
+
+      class xWebConnection {
+        constructor(id) {
+          this._id = id;
+        }
+
+        get id() {
+          return this._id;
+        }
+      }
+
+      class xWebVideoChat {
+        constructor(userid, from, to) {
+          this.from = new xWebConnection(from);
+          this.to = new xWebConnection(to);
+          this.client =  new WebSocket("ws://localhost:3030/", "protocolOne");
+          this.userid = userid;
+          this.client.onopen = event => {
+            this.client.send(JSON.stringify({message: 'wait', userid: this.userid, to: this.to.id, from: this.from.id}));
+          };
+          this.client.onmessage = event => {
+            console.log(event.data);
+          };
+          this.client.onclose = event => {
+            console.log(event);
+          };
+        }
+      };
       const urlParams = new URLSearchParams(window.location.search);
-      const userid = urlParams.get('userid');
-      const to = urlParams.get('to');
-      var client = new WebSocket("ws://localhost:3030/", "protocolOne");
-      client.onopen = function (event) {
-        client.send(JSON.stringify({message: 'wait', userid, to: to}));
-        console.log('1');
-      };
-      client.onmessage = function (event) {
-        console.log(event.data);
-      };
-      client.onclose = function(event) {
-        console.log(event);
-      };
-      client.onerror = function(event) {
-        console.log(event);
-      };
+      let chat = null;
+
+      function onChatViewLoad() {
+        chat = new xWebVideoChat(urlParams.get('userid'), urlParams.get('from'), urlParams.get('to'));
+      }
     </script>
   </head>
-  <body class="d-flex h-100 w-100 text-center text-white bg-dark">
+  <body class="d-flex h-100 w-100 text-center text-white bg-dark" onload="onChatViewLoad();">
     <div class="container d-flex w-100 h-100 p-3 flex-column">
       <div class="row justify-content-center">
         <header class="mb-3 align-items-start justify-content-center" style="max-width: 42em;">
@@ -114,7 +134,8 @@
               <div class="col-5">
                 <div class="card bg-transparent text-dark text-white border border-secondary">
                   <div class="card-body">
-                    <video id="localVideo" autoplay playsinline controls="false" style="width: 100%;"></video>
+                    <!-- VIDEO -->
+                    <video id="videoChatView" autoplay playsinline controls="false" style="width: 100%;"></video>
                   </div>
                 </div>
                 <div class="card bg-transparent text-dark text-white border border-secondary mt-2">

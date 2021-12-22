@@ -15,7 +15,7 @@ const database = {
   host: 'localhost',
   port: '3306',
   user: 'root',
-  password: 'novemberizing@21',
+  password: 'helloworld@17',
   database: 'xchat',
   connectionLimit: 32,
   insecureAuth : true
@@ -182,13 +182,13 @@ wss.on('connection', function connection(ws) {
     const json = JSON.parse(data.toString());
     console.log(json);
     if(json.message === 'wait') {
-      userid = parseInt(json.userid);
+      userid = userid ? userid : parseInt(json.userid);
       users.set(userid, ws);
       createRoom(ws, json.userid);
       console.log('wait: create room');
       const to = users.get(parseInt(json.to));
       if(to) {
-        to.send(JSON.stringify({message: 'wait', userid, to: json.to}));
+        to.send(JSON.stringify({message: 'wait', userid, to: json.to, from: json.from}));
       }
     }
     if(json.message === 'open') {

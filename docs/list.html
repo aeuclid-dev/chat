@@ -47,7 +47,7 @@
         if(json.message === 'request chat') {
           if(json.result) {
             if(json.result === 'accept') {
-            window.location.href=`./chat.html?userid=${userid}&to=${json.request.to}`;
+            window.location.href=`./chat.html?userid=${userid}&to=${json.request.to}&from=${json.request.from}`;
             } else if(json.result === 'reject') {
               requestModal.hide();
             } else if(json.result === 'cancel') {
@@ -58,7 +58,7 @@
             responseModal.show();
           }
         } else if(json.message === 'wait') {
-          window.location.href=`./chat.html?userid=${json.userid}&to=${json.to}`;
+          window.location.href=`./chat.html?userid=${userid}&to=${json.to}&from=${json.from}`;
         }
       };
       client.onclose = function(event) {
