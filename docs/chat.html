@@ -28,6 +28,25 @@
     <link href="cover.css" rel="stylesheet">
     <script src="./bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="./axios/axios.js"></script>
+    <script>
+      const urlParams = new URLSearchParams(window.location.search);
+      const userid = urlParams.get('userid');
+      const to = urlParams.get('to');
+      var client = new WebSocket("ws://localhost:3030/", "protocolOne");
+      client.onopen = function (event) {
+        client.send(JSON.stringify({message: 'wait', userid, to: to}));
+        console.log('1');
+      };
+      client.onmessage = function (event) {
+        console.log(event.data);
+      };
+      client.onclose = function(event) {
+        console.log(event);
+      };
+      client.onerror = function(event) {
+        console.log(event);
+      };
+    </script>
   </head>
   <body class="d-flex h-100 w-100 text-center text-white bg-dark">
     <div class="container d-flex w-100 h-100 p-3 flex-column">

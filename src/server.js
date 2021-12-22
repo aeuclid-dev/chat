@@ -29,7 +29,7 @@ app.use(
   })
 );
 
-const whitelist = ["http://localhost:8090"];
+const whitelist = ["http://ec2-15-164-93-25.ap-northeast-2.compute.amazonaws.com:8090"];
 const corsOptions = {
   origin: function (origin, callback) {
     if (whitelist.indexOf(origin) !== -1) {
@@ -181,6 +181,16 @@ wss.on('connection', function connection(ws) {
   ws.on('message', function message(data) {
     const json = JSON.parse(data.toString());
     console.log(json);
+    if(json.message === 'wait') {
+      userid = parseInt(json.userid);
+      users.set(userid, ws);
+      createRoom(ws, json.userid);
+      console.log('wait: create room');
+      const to = users.get(parseInt(json.to));
+      if(to) {
+        to.send(JSON.stringify({message: 'wait', userid, to: json.to}));
+      }
+    }
     if(json.message === 'open') {
       userid = parseInt(json.userid);
       users.set(userid, ws);
@@ -219,6 +229,7 @@ wss.on('connection', function connection(ws) {
   ws.on('close', function(event) {
     console.log('close ' + userid);
     deleteRoom(ws, userid);
+    users.delete(userid);
   });
 
   // ws.send('something');

@@ -46,7 +46,7 @@
         if(json.message === 'request chat') {
           if(json.result) {
             if(json.result === 'accept') {
-              window.location.href="./chat.html";
+            window.location.href=`./chat.html?userid=${userid}&to=${json.request.to}`;
             } else if(json.result === 'reject') {
               requestModal.hide();
             } else if(json.result === 'cancel') {
@@ -56,6 +56,8 @@
             request = json;
             responseModal.show();
           }
+        } else if(json.message === 'wait') {
+          window.location.href=`./chat.html?userid=${json.userid}&to=${json.to}`;
         }
       };
       client.onclose = function(event) {
@@ -90,7 +92,7 @@
       function onListLoad() {
         requestModal = new bootstrap.Modal(document.getElementById('requestChatModal'), {focus:true});
         responseModal = new bootstrap.Modal(document.getElementById('responseChatModal'), {focus:true});
-        axios.get('http://localhost:3000/v1/room/list/')
+        axios.get('http://ec2-15-164-93-25.ap-northeast-2.compute.amazonaws.com:3000/v1/room/list/')
              .then(res => {
               console.log(res);
               if(res.data.message.result && res.data.message.result.length) {
