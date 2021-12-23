@@ -10,7 +10,6 @@ module.exports = {
   output: {
     filename: 'main.js',
     path: path.resolve(__dirname, '../public'),
-    clean: true,
     publicPath: '/',
   },
   devtool: 'inline-source-map',
@@ -20,7 +19,7 @@ module.exports = {
     }),
   ],
   devServer: {
-    static: './public',
+    static: './docs',
   },
   module: {
     rules: [

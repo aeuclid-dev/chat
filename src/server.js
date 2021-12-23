@@ -29,7 +29,7 @@ app.use(
   })
 );
 
-const whitelist = ["http://ec2-3-142-79-180.us-east-2.compute.amazonaws.com:8090"];
+const whitelist = ["http://ec2-3-142-79-180.us-east-2.compute.amazonaws.com"];
 const corsOptions = {
   origin: function (origin, callback) {
     callback(null, true);
