@@ -125,7 +125,7 @@
           this.o = null;
           this.to = null;
           this.from = null;
-          this.client =  new WebSocket("ws://172.30.1.23:3030/", "protocolOne");
+          this.client =  new WebSocket("ws://ec2-3-142-79-180.us-east-2.compute.amazonaws.com:3030/", "protocolOne");
           this.userid = userid;
           this.client.onopen = event => {
             this.client.send(JSON.stringify({message: 'wait', userid: this.userid, to: to, from: from}));

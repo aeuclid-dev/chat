@@ -35,7 +35,7 @@
       let request = null;
       const urlParams = new URLSearchParams(window.location.search);
       const userid = urlParams.get('userid');
-      var client = new WebSocket("ws://172.30.1.23:3030/", "protocolOne");
+      var client = new WebSocket("ws://ec2-3-142-79-180.us-east-2.compute.amazonaws.com:3030/", "protocolOne");
       client.onopen = function (event) {
         client.send(JSON.stringify({message: 'open', userid}));
       };
@@ -93,7 +93,7 @@
       function onListLoad() {
         requestModal = new bootstrap.Modal(document.getElementById('requestChatModal'), {focus:true});
         responseModal = new bootstrap.Modal(document.getElementById('responseChatModal'), {focus:true});
-        axios.get('http://172.30.1.23:3000/v1/room/list/')
+        axios.get('http://ec2-3-142-79-180.us-east-2.compute.amazonaws.com:3000/v1/room/list/')
              .then(res => {
               console.log(res);
               if(res.data.message.result && res.data.message.result.length) {

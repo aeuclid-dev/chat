@@ -29,7 +29,7 @@ app.use(
   })
 );
 
-const whitelist = ["http://172.30.1.23:8090", "https://novemberizing.github.io"];
+const whitelist = ["http://ec2-3-142-79-180.us-east-2.compute.amazonaws.com:8090"];
 const corsOptions = {
   origin: function (origin, callback) {
     callback(null, true);

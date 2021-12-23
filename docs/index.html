@@ -41,7 +41,7 @@
           description = 'Winnie-the-Pooh, also called Pooh Bear and Pooh, is a fictional anthropomorphic teddy bear created by English author A. A. Milne and English illustrator E. H. Shepard.';
         }
         console.log({email, name, description});
-        axios.post('http://172.30.1.23:3000/v1/user/register', {email, name, description})
+        axios.post('http://ec2-3-142-79-180.us-east-2.compute.amazonaws.com:3000/v1/user/register', {email, name, description})
              .then(res => {
                location.href=`./list.html?userid=${res.data.message.userid}`;
               });
