@@ -13,7 +13,7 @@ export default class Psychologyst extends User {
 
     }
 
-    destroyRoom(roomno) {
-        
+    destroyRoom(no) {
+
     }
 }

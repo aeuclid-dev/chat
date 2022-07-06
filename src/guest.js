@@ -9,11 +9,11 @@ export default class Guest extends User {
 
     }
     
-    enterRoom(roomno) {
+    enterRoom(no) {
 
     }
 
-    leaveRoom(roomno) {
-        
+    leaveRoom(no) {
+
     }
 }
